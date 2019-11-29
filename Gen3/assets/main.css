@@ -1,0 +1,18 @@
+.btn-primary
+{
+    display: inline-block;
+    border-radius: 8px;
+    font-size: 14.5px;
+    padding: 6px 10px;
+    border: 0;
+    background: #3FA09E;
+    color: #FFF;
+    cursor: pointer;
+    outline: 0;
+}
+.btn-primary:hover {
+    background: rgb(22, 122, 121);
+}
+a {
+    color: #3FA09E;
+}
