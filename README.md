@@ -1,7 +1,5 @@
 # Resend CSM Activation Email Zendesk App
 
-Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
-
 This **Zendesk App** is designed for in-house use. This app allows agents within Zendesk to enter the first name, last name, email, site-type (residence/business), and the desired membership level into the sidebar. Once the data has been entered and submitted, it will then be delivered to our backend systems and the appropriate customized **CSM Activation Email** will be sent to the client.
 
 # Versions
