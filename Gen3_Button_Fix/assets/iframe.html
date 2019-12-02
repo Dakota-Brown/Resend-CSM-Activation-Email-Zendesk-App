@@ -13,7 +13,7 @@
   <script>  
   var client = ZAFClient.init();
     client.on('app.registered', e => {
-      client.invoke('resize', { width: '100%', height: '270px' });
+      client.invoke('resize', { width: '100%', height: '255px' });
       client.get('ticket.brand.subdomain').then(
         function(data) {
           var subdomain = data['ticket.brand.subdomain'];
@@ -52,7 +52,6 @@
     </div>
     <div class="formBox">
       <select id="rescom">
-        <option value="" disabled selected>Site Type</option>
         <option value="residential">Residential</option>
         <option value="commercial">Commercial</option>
       </select>
@@ -65,17 +64,14 @@
         <option value='essentialsplus'>Essentials Plus</option>
         <option value='priority'>Priority</option>
         <option value='proactive'>Proactive</option>
-        <option value='signature'>Signature</option>
       </select>
     </div>
-    <div>
-      <button type ="button" class="btn btn-primary" onclick="myFunction()">Send Email</button>
-    </div>
+      <button type ="button" id="btn" onclick="myFunction()">Click to Send Email</button>
     <div>
       <p id="demo"></p>
     </div>
-    <div><p id="explain"><a href="https://www.notion.so/onevision/Resend-CSM-Activation-Email-Zendesk-App-Documentation-6a40d951a21f45d593fac5bcdbaa5642"target="_blank">Documentation</a></p></div>
-    <div class="formBox">Z
+    <div><p id="explain"><a href="https://www.notion.so/onevision/Resend-CSM-Activation-Email-Zendesk-App-3f33d16a97d045fb8d7d4764d4f05017"target="_blank">Documentation</a></p></div>
+    <div class="formBox">
       <input type="hidden" id="subdomainform" readonly="readonly"/>
     </div>
     <div class="formBox">
