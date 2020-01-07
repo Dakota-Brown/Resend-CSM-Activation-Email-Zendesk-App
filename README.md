@@ -13,7 +13,7 @@ There are 4 versions of the app with the only difference between each one being 
 - **Gen2**
 	- No Selection, Essentials, Essentials Plus, Priority, Proactive  
 - **EPlus_Only**
-	- No Selection, Limited Support, Essentials Plus (edited)
+	- No Selection, Limited Support, Essentials Plus
 
 ## General Information
 
