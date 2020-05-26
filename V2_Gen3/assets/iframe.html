@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+			<link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+				<link href="main.css" rel="stylesheet">
+					<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+					<script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
+					<script src="https://cdn.jsdelivr.net/handlebarsjs/4.0.8/handlebars.min.js"></script>
+					<script type="text/javascript" src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
+				</head>
+				<body>
+					<script>  
+  var client = ZAFClient.init();
+    client.on('app.registered', e => {
+      client.invoke('resize', { width: '100%', height: '385px' });
+      client.get('ticket.brand.subdomain').then(
+        function(data) {
+          var subdomain = data['ticket.brand.subdomain'];
+          console.log('Zendesk Subdomain is ' + subdomain);
+          document.getElementById('subdomainform').value = subdomain;
+        }
+      );
+
+      client.get('ticket.organization.id').then(
+        function(data) {
+          var org_id = data['ticket.organization.id'];
+          console.log('Org id is ' + org_id);
+          document.getElementById('orgidform').value = org_id;
+        }
+      );
+
+      client.get('ticket.organization.customField:plan_cpp_expiration').then(
+        function(data) {
+          var cpp_xp = data['ticket.organization.customField:plan_cpp_expiration'];
+          console.log('CPP is ' + cpp_xp);
+          document.getElementById('cppxp').value = cpp_xp;
+        }
+      );
+    });
+  </script>
+					<section class="tabs">
+						<!-- Panel 1 -->
+						<input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
+						<label for="tab-1" class="tab-label-1">Send An Email</label>
+						<!-- Panel 2 -->
+						<input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
+						<label for="tab-2" class="tab-label-2">Day1 Resend</label>
+						<!-- Tab Content -->
+						<div class="content">
+							<div class="content-1">
+								<form>
+                  <input type="text" name="firstName" placeholder="First Name" id="firstName1" required/>
+									<input type="text" name="email" placeholder="Email" id="email1" required />
+									<select id="email_type" required>
+										<option value="Membership_Information" id="myCheck1" selected>Membership Information</option>
+										<option value="TOS_Acceptance" id="myCheck1">TOS Acceptance</option>
+                  </select>
+                  <select id="rescom">
+										<option value="residential" id="rescom">Residential</option>
+										<option value="commercial" id="rescom">Commercial</option>
+									</select>
+									<input type="button" name="next" class="next action-button" value="Send" id="submit" />
+									<p id="explain">
+										<a href="https://www.notion.so/onevision/Resend-CSM-Activation-Email-Zendesk-App-Documentation-6a40d951a21f45d593fac5bcdbaa5642"target="_blank">FAQ</a>
+									</p>
+								</form>
+							</div>
+							<div class="content-2">
+								<form id="day1Resend">
+									<input type="text" name="firstName" placeholder="First Name" id="firstName"/>
+									<input type="text" name="lastName" placeholder="Last Name" id="lastName"/>
+									<input type="text" name="email" placeholder="Email" id="email"/>
+									<select id="rescom">
+										<option value="residential" id="rescom">Residential</option>
+										<option value="commercial" id="rescom">Commercial</option>
+									</select>
+									<select id="membership">
+										<option value="" disabled selected id="membership">Desired Membership?</option>
+										<option value='noselection' id="membership" selected="selected">No Selection</option>
+										<option value='limitedsupport' id="membership">Limited Support</option>
+										<option value='essentialsplus' id="membership">Essentials Plus</option>
+										<option value='priority' id="membership">Priority</option>
+										<option value='proactive' id="membership">Proactive</option>
+									</select>
+									<input type="button" name="next" class="next action-button" value="Send" id="submit1" />
+									<p id="explain">
+										<a href="https://www.notion.so/onevision/Resend-CSM-Activation-Email-Zendesk-App-Documentation-6a40d951a21f45d593fac5bcdbaa5642"target="_blank">FAQ</a>
+									</p>
+									<div class="formBox">
+										<input type="hidden" id="subdomainform" readonly="readonly"/>
+									</div>
+									<div class="formBox">
+										<input type="hidden" id="orgidform" readonly="readonly"/>
+									</div>
+									<div class="formBox">
+										<input type="hidden" id="cppxp" readonly="readonly"/>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!--.content -->
+					</section>
+					<!--.tabs -->
+					<script>
+  function myFunction() {
+    document.getElementById("day1Resend").reset();
+  }
+  
+					</script>
+					<script>
+    let content = [];
+    const addDay1 = (ev)=>{
+      let information = { 
+        action: "day1",
+        id: Date.now(),
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        subdomain: document.getElementById('subdomainform').value,
+        membership: document.getElementById('membership').value,
+        orgid: document.getElementById('orgidform').value,
+        rescom: document.getElementById('rescom').value,
+        cpp_exp: document.getElementById('cppxp').value
+      }
+      content.push(content);
+      document.forms[0].reset();
+
+      const Url ='https://bcbb1567-d19c-424c-97b8-23b142150abc.trayapp.io';
+
+    $.ajax({
+      url: "https://bcbb1567-d19c-424c-97b8-23b142150abc.trayapp.io?action=day1",
+      type: "POST",
+      dataType: 'json',
+      data: {information},
+      complete: function(){alert("Failure")}
+    });
+    myFunction()
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.getElementById('submit1').addEventListener('click', addDay1);
+    });
+  </script>
+					<script>
+    let content1 = [];
+    const membership = (ev)=>{
+      let information1 = { 
+        action: "membership",
+        id: Date.now(),
+        firstName: document.getElementById('firstName1').value,
+        email_type: document.getElementById('email_type').value,
+        email: document.getElementById('email1').value,
+        subdomain: document.getElementById('subdomainform').value,
+        rescom: document.getElementById('rescom').value,
+        orgid: document.getElementById('orgidform').value
+      }
+      content1.push(content1);
+      document.forms[0].reset();
+
+      const Url ='https://bcbb1567-d19c-424c-97b8-23b142150abc.trayapp.io';
+
+    $.ajax({
+      url: "https://bcbb1567-d19c-424c-97b8-23b142150abc.trayapp.io?action=membership",
+      type: "POST",
+      dataType: 'json',
+      data: {information1},
+      complete: function(){alert("Failure")}
+    });
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.getElementById('submit').addEventListener('click', membership);
+    });
+  </script>
+				</body>
+			</html>

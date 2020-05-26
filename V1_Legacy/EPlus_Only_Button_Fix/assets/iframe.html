@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="main.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/handlebarsjs/4.0.8/handlebars.min.js"></script>
+  <script type="text/javascript" src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
+</head>
+<body>
+  <script>  
+  var client = ZAFClient.init();
+    client.on('app.registered', e => {
+      client.invoke('resize', { width: '100%', height: '255px' });
+      client.get('ticket.brand.subdomain').then(
+        function(data) {
+          var subdomain = data['ticket.brand.subdomain'];
+          console.log('Zendesk Subdomain is ' + subdomain);
+          document.getElementById('subdomainform').value = subdomain;
+        }
+      );
+
+      client.get('ticket.organization.id').then(
+        function(data) {
+          var org_id = data['ticket.organization.id'];
+          console.log('Org id is ' + org_id);
+          document.getElementById('orgidform').value = org_id;
+        }
+      );
+
+      client.get('ticket.organization.customField:plan_cpp_expiration').then(
+        function(data) {
+          var cpp_xp = data['ticket.organization.customField:plan_cpp_expiration'];
+          console.log('CPP is ' + cpp_xp);
+          document.getElementById('cppxp').value = cpp_xp;
+        }
+      );
+
+    });
+  </script>
+  <form name="submissionForm">
+    <div class="formBox">
+      <input type="text" id="firstName" placeholder="First Name"/>
+    </div>
+    <div class="formBox">
+      <input type="text" id="lastName" placeholder="Last Name"/>
+    </div>
+    <div class="formBox">
+      <input type="text" id="email" placeholder="Email"/>
+    </div>
+    <div class="formBox">
+      <select id="rescom">
+        <option value="residential">Residential</option>
+        <option value="commercial">Commercial</option>
+      </select>
+    </div>
+    <div class="formBox">
+      <select id="membership">
+        <option value="" disabled selected>Desired Membership?</option>
+        <option value='noselection'>No Selection</option>
+        <option value='limitedsupport'>Limited Support</option>
+        <option value='essentialsplus'>Essentials Plus</option>
+      </select>
+    </div>
+      <button type ="button" id="btn" onclick="myFunction()">Click to Send Email</button>
+    <div>
+      <p id="demo"></p>
+    </div>
+    <div><p id="explain"><a href="https://www.notion.so/onevision/Resend-CSM-Activation-Email-Zendesk-App-Documentation-6a40d951a21f45d593fac5bcdbaa5642"target="_blank">FAQ</a></p></div>
+    <div class="formBox">
+      <input type="hidden" id="subdomainform" readonly="readonly"/>
+    </div>
+    <div class="formBox">
+      <input type="hidden" id="orgidform" readonly="readonly"/>
+    </div>
+    <div class="formBox">
+      <input type="hidden" id="cppxp" readonly="readonly"/>
+    </div>
+  </form>
+  <script>
+  function myFunction() {
+  document.getElementById("demo").innerHTML = "<span style='color:green'>Submitted</span>";
+  }
+  </script>
+  <script>
+    let content = [];
+    const addDay1 = (ev)=>{
+      let information = { 
+        id: Date.now(),
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        subdomain: document.getElementById('subdomainform').value,
+        membership: document.getElementById('membership').value,
+        orgid: document.getElementById('orgidform').value,
+        rescom: document.getElementById('rescom').value,
+        cpp_exp: document.getElementById('cppxp').value
+      }
+      content.push(content);
+      document.forms[0].reset();
+
+      const Url ='https://29218bbe-2670-4ac7-84c7-4e398caf6d10.trayapp.io';
+
+    $.ajax({
+      url: "https://29218bbe-2670-4ac7-84c7-4e398caf6d10.trayapp.io",
+      type: "POST",
+      dataType: 'json',
+      data: {information},
+      complete: function(){alert("Failure")}
+    });
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.getElementById('btn').addEventListener('click', addDay1);
+    });
+  </script>
+
+</body>
+</html>
