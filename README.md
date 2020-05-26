@@ -18,5 +18,15 @@ There are 4 versions of the app with the only difference between each one being 
 ## General Information
 
 - **Creator Email:** dakota.brown@onevisionresources.com
-- **Last Update:** 12/01/19
-- **Current Version:** 1.0
+- **Last Update:** 05/26/20
+- **Current Version:** 2.0
+
+## V2 Changelog
+- Redesigned the UI from the ground up.
+- Added Membership Information Email Send Option
+- Add TOS Acceptance Email Send Option
+- Improved general logic flow and backend processing.
+
+## Previous Versions
+- **Version:** 1.0
+	- **Last Update:** 12/01/19
